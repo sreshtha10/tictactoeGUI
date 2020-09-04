@@ -1,0 +1,14 @@
+This program has 6 functions:
+
+1. homeScreen - This function is used to display the home screen of the game for 2 seconds after which the game starts. In this function, I wrote the code to draw the grid of the game as well.
+
+2. reset - Once the game is completed this function sets all the variables to initial state and the game restarts.
+
+3. status - This function tells the user about the status of the game.
+
+4. userClick - This function fetches the value where the mouse is clicked and accordingly draw x and o using drawXO function.
+
+5. drawXO - This function is used to draw the x and o in the application, first the user fetch the row and column from userClick() function and then draw x if current value of the variable xo is x and vice versa.
+
+6. checkWin - This function is used to check the winner and contains the basic algorithm of the game. If the values in the matrix TTT matches vertically, horizontally or diagonally we will have the winner. Winner can be determined using xo variable which stores x where x
+                is drawn and y where y is drawn and then store the value in the matrix.
