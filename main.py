@@ -1,4 +1,5 @@
-import pygame,sys,time,random
+import pygame,time,sys
+
 pygame.init()
 fps = 60
 xo = 'x'
@@ -12,7 +13,6 @@ white = (255,255,255)
 line_color = (0,0,0)
 clock = pygame.time.Clock()
 ttt = [[None]*3,[None]*3,[None]*3]
-mode = None
 
 pygame.display.set_caption('Tic Tac Toe')
 screen = pygame.display.set_mode((width,height+100),0,32)
@@ -20,43 +20,25 @@ screen = pygame.display.set_mode((width,height+100),0,32)
 x_img = pygame.image.load('images/x.png')
 o_img = pygame.image.load('images/o.png')
 home_img = pygame.image.load('images/home.png')
-singlePlayer = pygame.image.load('images/singlePlayer.png')
-multiPlayer = pygame.image.load('images/multiPlayer.png')
-
 
 x_img = pygame.transform.scale(x_img,(80,80))
 o_img = pygame.transform.scale(o_img,(80,80))
 home_img = pygame.transform.scale(home_img,(width,height+100))
-singlePlayer = pygame.transform.scale(singlePlayer,(200,200))
-multiPlayer = pygame.transform.scale(multiPlayer,(170,170))
-
 
 def homeScreen():
-    global mode
-
     screen.blit(home_img,(0,0))
     pygame.display.update()
     time.sleep(1)
     screen.fill(white)
-    pygame.draw.line(screen,line_color,(0,250),(width,250),7)
-    screen.blit(singlePlayer,(100,0))
-    screen.blit(multiPlayer,(100,300))
-    pygame.display.update()
 
 
-
-
-
-def mainScreen():
-    screen.fill(white)
     pygame.draw.line(screen,line_color,(width/3,0),(width/3,height),7)
     pygame.draw.line(screen,line_color,(width/3*2,0),(width/3*2,height),7)
 
     pygame.draw.line(screen,line_color,(0,height/3),(width,height/3),7)
     pygame.draw.line(screen,line_color,(0,height/3*2),(width,height/3*2),7)
+
     status()
-
-
 
 def status():
     global draw
@@ -72,6 +54,7 @@ def status():
     text_rect = text.get_rect(center = (width/2,500-50))
     screen.blit(text,text_rect)
     pygame.display.update()
+
 
 def checkWin():
     global ttt,winner, draw
@@ -161,42 +144,7 @@ def userClick():
         checkWin()
 
 
-def userClickSingle():
-    x,y = pygame.mouse.get_pos()
-    if(x<width/3):
-        col = 1
-    elif(x<(width/3)*2):
-        col = 2
-    elif( x< width):
-        col = 3
-    else:
-        col = None
-    if (y < height / 3):
-        row = 1
-    elif (y < (height / 3) * 2):
-        row = 2
-    elif (y < height):
-        row = 3
-    else:
-        row = None
-    if (row and col and ttt[row - 1][col - 1] is None):
-        global xo
-        # draw the x or o on screen
-        drawXO(row, col)
-        checkWin()
-        a = random.randrange(1,4)
-        b = random.randrange(1,4)
-        while(ttt[a-1][b-1] is not None):
-            a = random.randrange(1,4)
-            b= random.randrange(1,4)
-        drawXO(a,b)
-        checkWin()
-
-
-
-
 homeScreen()
-
 
 run = True
 while run:
@@ -204,35 +152,13 @@ while run:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-                x,y = pygame.mouse.get_pos()
-                if y > 250:
-                    mainScreen()
-                    while True:
-                        for event in pygame.event.get():
-                            if event.type == pygame.QUIT:
-                                pygame.quit()
-                                sys.exit()
-                            elif event.type is pygame.MOUSEBUTTONDOWN:
-                                userClick()
-                                if (winner or draw):
-                                    reset()
-                        pygame.display.update()
-                        clock.tick(fps)
-                if y < 250:
-                    mainScreen()
-                    while True:
-                        for event in pygame.event.get():
-                            if event.type == pygame.QUIT:
-                                pygame.quit()
-                                sys.exit()
-                            elif event.type is pygame.MOUSEBUTTONDOWN:
-                                userClickSingle()
-                                if winner or draw:
-                                    reset()
-                        pygame.display.update()
-                        clock.tick(fps)
+        elif event.type is pygame.MOUSEBUTTONDOWN:
+            userClick()
+            if(winner or draw):
+                reset()
 
+    pygame.display.update()
+    clock.tick(fps)
 
 
 
