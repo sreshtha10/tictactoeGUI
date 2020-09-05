@@ -1,4 +1,4 @@
-This program has 6 functions:
+Description of the major functions used in the program:
 
 1. homeScreen - This function is used to display the home screen of the game for 2 seconds after which the game starts. In this function, I wrote the code to draw the grid of the game as well.
 
@@ -12,3 +12,5 @@ This program has 6 functions:
 
 6. checkWin - This function is used to check the winner and contains the basic algorithm of the game. If the values in the matrix TTT matches vertically, horizontally or diagonally we will have the winner. Winner can be determined using xo variable which stores x where x
                 is drawn and y where y is drawn and then store the value in the matrix.
+
+
