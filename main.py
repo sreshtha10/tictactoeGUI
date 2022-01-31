@@ -203,6 +203,7 @@ while run:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            main_screen()
             x, y = pygame.mouse.get_pos()
             if y > 250:
                 main_screen()
